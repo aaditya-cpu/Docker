@@ -1,0 +1,33 @@
+/* CSS HEX */
+:root {
+    --red-pantone: #e63946ff;
+    --honeydew: #f1faeeff;
+    --non-photo-blue: #a8dadcff;
+    --cerulean: #457b9dff;
+    --berkeley-blue: #1d3557ff;
+}
+
+body {
+    background-color: var(--honeydew);
+    color: var(--berkeley-blue);
+    transition: all 0.3s ease-in-out;
+}
+
+#doctor-table {
+    width: 60% !important;
+    margin: auto;
+    background-color: var(--honeydew);
+    color: var(--berkeley-blue);
+    border-radius: 15px;
+    box-shadow: 10px 10px 30px #b8b8b8,
+               -10px -10px 30px #ffffff;
+}
+
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+    background-color: var(--non-photo-blue);
+    transition: all 0.3s ease-in-out;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, .05);
+}

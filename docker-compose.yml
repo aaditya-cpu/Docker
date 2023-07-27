@@ -1,0 +1,47 @@
+version: '3'
+
+services:
+  db:
+    image: mysql:latest
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: wordpress
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+    ports:
+      - '3307:3306'
+
+  wordpress:
+    depends_on:
+      - db
+    image: wordpress:latest
+    volumes:
+      - ./wordpress:/var/www/html
+      - ./uploads:/var/www/html/wp-content/uploads  # New line to mount uploads directory
+    ports:
+      - '8081:80'  # Change port to 80 for standard HTTP access
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_CONFIG_EXTRA: |
+        define('WP_ALLOW_MULTISITE', true);
+        define('WP_DEBUG', true);
+        define('WP_DEBUG_DISPLAY', false);
+        define('WP_DEBUG_LOG', true);
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - '3302:8080'
+
+volumes:
+  db_data: {}
+  wordpress: {}
+  uploads: {}  # New line to create a volume for the uploads directory

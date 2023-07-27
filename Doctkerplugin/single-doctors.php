@@ -1,33 +1,66 @@
-<?php get_header(); ?>
+<?php
+get_header(); ?>
+
+<style>
+:root {
+    --red-pantone: #e63946ff;
+    --honeydew: #f1faeeff;
+    --non-photo-blue: #a8dadcff;
+    --cerulean: #457b9dff;
+    --berkeley-blue: #1d3557ff;
+}
+.rounded-circle {
+    object-fit: cover;
+    width: 200px;
+    height: 200px;
+}
+.mb-3 {
+  margin-bottom: 1rem !important;
+  margin-left: 4rem;
+  margin-right: 4rem;
+}
+</style>
 
 <main id="main" class="site-main" role="main">
 
-    <?php while ( have_posts() ) : the_post(); ?>
+<?php
+while ( have_posts() ) : the_post(); ?>
 
-        <div class="card mb-3">
-            <div class="row g-0">
-                <div class="col-md-4 d-flex align-items-center justify-content-center">
-                    <?php 
-                        if ( has_post_thumbnail() ) { 
-                            the_post_thumbnail('medium', array('class' => 'rounded-circle img-fluid'));
-                        } 
-                    ?>
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title"><?php the_title(); ?></h5>
-                        <p class="card-text"><strong>First Name: </strong><?php echo get_post_meta(get_the_ID(), 'first_name', true); ?></p>
-                        <p class="card-text"><strong>Last Name: </strong><?php echo get_post_meta(get_the_ID(), 'last_name', true); ?></p>
-                        <p class="card-text"><strong>Specialization: </strong><?php echo get_post_meta(get_the_ID(), 'specialization', true); ?></p>
-                        <p class="card-text"><strong>Office Address: </strong><?php echo get_post_meta(get_the_ID(), 'office_address', true); ?></p>
-                        <p class="card-text"><strong>Available Time: </strong><?php echo get_post_meta(get_the_ID(), 'available_time', true); ?></p>
-                        <p class="card-text"><strong>Contact Details: </strong><?php echo get_post_meta(get_the_ID(), 'contact_details', true); ?></p>
-                    </div>
+<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+
+    <div class="card mb-3">
+        <div class="row g-0">
+            <div class="col-md-4 d-flex align-items-center justify-content-center">
+                <?php if(has_post_thumbnail()): ?>
+                    <?php the_post_thumbnail('full', ['class' => 'rounded-circle img-fluid']); ?>
+                <?php endif; ?>
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <header class="entry-header">
+                        <h1 class="card-title entry-title" style="color: var(--berkeley-blue);"><?php the_title(); ?></h1>
+                    </header><!-- .entry-header -->
+                    <div class="card-text entry-content">
+                        <p><strong style="color: var(--cerulean);">First Name: </strong><span style="color: var(--red-pantone);"><?php echo get_post_meta(get_the_ID(), 'first_name', true); ?></span></p>
+                        <p><strong style="color: var(--cerulean);">Last Name: </strong><span style="color: var(--red-pantone);"><?php echo get_post_meta(get_the_ID(), 'last_name', true); ?></span></p>
+                        <p><strong style="color: var(--cerulean);">Specialization: </strong><span style="color: var(--red-pantone);"><?php echo get_post_meta(get_the_ID(), 'specialization', true); ?></span></p>
+                        <p><strong style="color: var(--cerulean);">Office Address: </strong><span style="color: var(--red-pantone);"><?php echo get_post_meta(get_the_ID(), 'office_address', true); ?></span></p>
+                        <p><strong style="color: var(--cerulean);">Available Time: </strong><span style="color: var(--red-pantone);"><?php echo get_post_meta(get_the_ID(), 'available_time', true); ?></span></p>
+                        <p><strong style="color: var(--cerulean);">Contact Details: </strong><span style="color: var(--red-pantone);"><?php echo get_post_meta(get_the_ID(), 'contact_details', true); ?></span></p>
+                    </div><!-- .entry-content -->
                 </div>
             </div>
         </div>
+    </div>
 
-    <?php endwhile; // End of the loop. ?>
+    <div class="post-content">
+        <h2 style="color: var(--cerulean);">About:</h2>
+        <p style="color: var(--red-pantone);"><?php the_content(); ?></p>
+    </div>
+
+</article><!-- #post-## -->
+
+<?php endwhile; // End of the loop. ?>
 
 </main><!-- #main -->
 

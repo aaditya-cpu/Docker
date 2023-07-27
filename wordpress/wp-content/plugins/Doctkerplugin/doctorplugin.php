@@ -34,7 +34,7 @@ function doctor_directory_enqueue_assets() {
   wp_enqueue_style('datatables-css');
   
   // Enqueue custom styles
-  wp_enqueue_style('my-plugin-custom', plugins_url('/css/custom.css', __FILE__));
+  wp_enqueue_style('my-plugin-custom', plugins_url('/style/styles.css', __FILE__));
 
   // Register jQuery (if not registered already)
   if (!wp_script_is('jquery', 'registered')) {
@@ -66,10 +66,13 @@ add_action('wp_enqueue_scripts', 'doctor_directory_enqueue_assets');
 function doctor_search_form() {
   ob_start();
   ?>
-  <form action="" method="get">
-    <input type="text" name="doctor_search" value="<?php echo $_GET['doctor_search']; ?>" placeholder="Name or Specialization">
-    <input type="submit" value="Search">
+<div style="display: flex; justify-content: center;">
+  <form action="" method="get" style="width: 50%; text-align: center;">
+    <input type="text" name="doctor_search" value="<?php echo $_GET['doctor_search']; ?>" placeholder="Name or Specialization" style="width: 100%;">
+    <input type="submit" value="Search" class="searchbutton button btn">
   </form>
+</div>
+
   <?php
   return ob_get_clean();
 }
@@ -168,46 +171,47 @@ function import_csv() {
 }
 
 function list_all_doctors() {
-  $args = array(
-      'post_type' => 'doctors',
-      'posts_per_page' => -1,
-      'post_status' => 'publish'
-  );
+    $args = array(
+        'post_type' => 'doctors',
+        'posts_per_page' => -1,
+        'post_status' => 'publish'
+    );
 
-  $doctors = new WP_Query($args);
+    $doctors = new WP_Query($args);
 
-  $output = '<div style="max-width: 60%; margin: auto; box-shadow: 0px 10px 15px rgba(0,0,0,0.1); transition: all 0.3s ease; border-radius: 10px; overflow: hidden;">';
-  $output .= '<table id="doctor-table" class="table table-hover table-striped alldoctable" style="width: 100%; background: var(--berkeley-blue); color: var(--honeydew);">';
-  $output .= '<thead class="table-light">';
-  $output .= '<tr>
-              <th scope="col">Doctor Name</th>
-              <th scope="col">Specialization</th>
-              <th scope="col">Office Address</th>
-              <th scope="col">Available Time</th>
-              <th scope="col">Contact Details</th>
-            </tr>';
-  $output .= '</thead>';
-  $output .= '<tbody>';
+    $output = '<div class="doctorTable" style="max-width: 90%; margin: auto; box-shadow: 0px 10px 15px rgba(0,0,0,0.1); transition: all 0.3s ease; border-radius: 10px; overflow: hidden;">';
+    $output .= '<div style="overflow-x: auto;">';
+    $output .= '<table id="doctor-table" class="table table-hover table-striped alldoctable" style="width: 100%; background: var(--berkeley-blue); color: var(--honeydew);">';
+    $output .= '<thead class="table-light">';
+    $output .= '<tr>
+                <th scope="col">Doctor Name</th>
+                <th scope="col">Specialization</th>
+                <th scope="col">Office Address</th>
+                <th scope="col">Available Time</th>
+                <th scope="col">Contact Details</th>
+              </tr>';
+    $output .= '</thead>';
+    $output .= '<tbody>';
 
-  if ($doctors->have_posts()) {
-      while ($doctors->have_posts()) {
-          $doctors->the_post();
-          $output .= '<tr>';
-          $output .= '<td><a href="' . get_permalink() . '" style="color: var(--red-pantone);">' . get_the_title() . '</a></td>';
-          $output .= '<td>' . get_post_meta(get_the_ID(), 'specialization', true) . '</td>';
-          $output .= '<td>' . get_post_meta(get_the_ID(), 'office_address', true) . '</td>';
-          $output .= '<td>' . get_post_meta(get_the_ID(), 'available_time', true) . '</td>';
-          $output .= '<td>' . get_post_meta(get_the_ID(), 'contact_details', true) . '</td>';
-          $output .= '</tr>';
-      }
-      wp_reset_postdata();
-  } else {
-      $output .= '<tr><td colspan="5">No doctors found.</td></tr>';
-  }
+    if ($doctors->have_posts()) {
+        while ($doctors->have_posts()) {
+            $doctors->the_post();
+            $output .= '<tr>';
+            $output .= '<td><a href="' . get_permalink() . '" style="color: var(--red-pantone);">' . get_the_title() . '</a></td>';
+            $output .= '<td>' . get_post_meta(get_the_ID(), 'specialization', true) . '</td>';
+            $output .= '<td>' . get_post_meta(get_the_ID(), 'office_address', true) . '</td>';
+            $output .= '<td>' . get_post_meta(get_the_ID(), 'available_time', true) . '</td>';
+            $output .= '<td>' . get_post_meta(get_the_ID(), 'contact_details', true) . '</td>';
+            $output .= '</tr>';
+        }
+        wp_reset_postdata();
+    } else {
+        $output .= '<tr><td colspan="5">No doctors found.</td></tr>';
+    }
 
-  $output .= '</tbody></table></div>';
+    $output .= '</tbody></table></div></div>';
 
-  return $output;
+    return $output;
 }
 
 

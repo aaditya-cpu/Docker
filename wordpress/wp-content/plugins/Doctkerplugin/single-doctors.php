@@ -1,6 +1,26 @@
 <?php
 get_header(); ?>
 
+<style>
+:root {
+    --red-pantone: #e63946ff;
+    --honeydew: #f1faeeff;
+    --non-photo-blue: #a8dadcff;
+    --cerulean: #457b9dff;
+    --berkeley-blue: #1d3557ff;
+}
+.rounded-circle {
+    object-fit: cover;
+    width: 200px;
+    height: 200px;
+}
+.mb-3 {
+  margin-bottom: 1rem !important;
+  margin-left: 4rem;
+  margin-right: 4rem;
+}
+</style>
+
 <main id="main" class="site-main" role="main">
 
 <?php
@@ -8,13 +28,11 @@ while ( have_posts() ) : the_post(); ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
-    <div class="card mb-3" style="--red-pantone: #e63946ff; --honeydew: #f1faeeff; --non-photo-blue: #a8dadcff; --cerulean: #457b9dff; --berkeley-blue: #1d3557ff;">
+    <div class="card mb-3">
         <div class="row g-0">
-            <div class="col-md-4">
+            <div class="col-md-4 d-flex align-items-center justify-content-center">
                 <?php if(has_post_thumbnail()): ?>
-                    <div class="rounded-circle mx-auto d-block">
-                        <?php the_post_thumbnail('full', ['class' => 'rounded-circle img-fluid']); ?>
-                    </div>
+                    <?php the_post_thumbnail('full', ['class' => 'rounded-circle img-fluid']); ?>
                 <?php endif; ?>
             </div>
             <div class="col-md-8">
@@ -33,6 +51,11 @@ while ( have_posts() ) : the_post(); ?>
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="post-content">
+        <h2 style="color: var(--cerulean);">About:</h2>
+        <p style="color: var(--red-pantone);"><?php the_content(); ?></p>
     </div>
 
 </article><!-- #post-## -->

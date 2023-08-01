@@ -2,10 +2,6 @@
 	"folders": [
 		{
 			"path": "."
-		},
-		{
-			"name": "DockWpSHread",
-			"path": "DockWpSHread"
 		}
 	],
 	"settings": {}

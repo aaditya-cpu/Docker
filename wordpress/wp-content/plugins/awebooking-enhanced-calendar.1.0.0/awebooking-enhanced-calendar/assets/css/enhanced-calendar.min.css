@@ -1,0 +1,1 @@
+.flatpickr-day.unavailable:before{content:'';width:65%;background:#ddd;height:1px;position:absolute;top:50%;left:20%;-webkit-transform:rotate(135deg);transform:rotate(135deg)}

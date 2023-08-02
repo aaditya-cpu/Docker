@@ -1,0 +1,71 @@
+# Copyright (C) 2018 AweBooking Fees
+# This file is distributed under the same license as the AweBooking Fees package.
+msgid ""
+msgstr ""
+"Project-Id-Version: AweBooking Fees\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: inc/Admin_Setting.php:30
+msgid "Gallery"
+msgstr ""
+
+#: inc/Admin_Setting.php:36
+msgid "Display room gallery on search?"
+msgstr ""
+
+#: inc/Admin_Setting.php:43
+msgid "Display gallery on single room?"
+msgstr ""
+
+#: inc/views/photoswipe.php:33
+msgid "Close (Esc)"
+msgstr ""
+
+#: inc/views/photoswipe.php:34
+msgid "Share"
+msgstr ""
+
+#: inc/views/photoswipe.php:35
+msgid "Toggle fullscreen"
+msgstr ""
+
+#: inc/views/photoswipe.php:36
+msgid "Zoom in/out"
+msgstr ""
+
+#: inc/views/photoswipe.php:51
+msgid "Previous (arrow left)"
+msgstr ""
+
+#: inc/views/photoswipe.php:52
+msgid "Next (arrow right)"
+msgstr ""
+
+#: inc/views/template-room-type.php:55
+msgctxt "room view button"
+msgid "Room view"
+msgstr ""
+
+#: inc/views/template-room-type.php:65
+msgctxt "area size button"
+msgid "Area size"
+msgstr ""
+
+#. translators: %1$s area size, %2$s measure unit
+#: inc/views/template-room-type.php:69
+msgctxt "room area size"
+msgid "%1$s %2$s"
+msgstr ""
+
+#: inc/views/template-room-type.php:81
+msgctxt "bed button"
+msgid "Bed"
+msgstr ""

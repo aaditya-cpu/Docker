@@ -1,0 +1,29 @@
+[
+    {
+        "name": "awethemes/support",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "git@gitlab.com:packages-awethemes/support.git",
+            "reference": "f59a5aa22ed7aa0cdc4c1048010697a775e7af9b"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "http://packages.awe7.com/dist/awethemes/support/awethemes-support-f59a5aa22ed7aa0cdc4c1048010697a775e7af9b-zip-ada066.zip",
+            "reference": "f59a5aa22ed7aa0cdc4c1048010697a775e7af9b",
+            "shasum": "1f049a60c73af86e01de915695b6c44ce842d551"
+        },
+        "require": {
+            "php": ">=5.3.9"
+        },
+        "time": "2017-09-05T07:23:36+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Awethemes\\Support\\": "inc/"
+            }
+        }
+    }
+]

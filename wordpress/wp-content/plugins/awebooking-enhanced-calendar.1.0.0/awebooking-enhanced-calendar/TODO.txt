@@ -1,3 +1,0 @@
-TODO:
-- Click date -> goto search
-- Disable date in check available form

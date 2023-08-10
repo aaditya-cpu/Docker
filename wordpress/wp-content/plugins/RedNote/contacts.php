@@ -1,4 +1,27 @@
 <?php
+function my_csv_importer_create_table() {
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'imported_contacts';
+    
+    // Check if the table already exists
+    if ($wpdb->get_var("SHOW TABLES LIKE '$table_name'") != $table_name) {
+        $charset_collate = $wpdb->get_charset_collate();
+
+        $sql = "CREATE TABLE $table_name (
+            id mediumint(9) NOT NULL AUTO_INCREMENT,
+            name varchar(255) NOT NULL,
+            mobile varchar(15) NOT NULL,
+            email varchar(100) NOT NULL,
+            level varchar(50) NOT NULL,
+            profile_picture_url varchar(255) NOT NULL,
+            PRIMARY KEY (id)
+        ) $charset_collate;";
+
+        require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+        dbDelta($sql);
+    }
+}
+
 function my_csv_importer_contacts_page() {
     global $wpdb;
     $table_name = $wpdb->prefix . 'imported_contacts';

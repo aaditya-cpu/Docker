@@ -8,8 +8,13 @@
 
 // Include other files
 include_once plugin_dir_path(__FILE__) . 'importer.php';
-include_once plugin_dir_path(__FILE__) . 'shortcodes.php';
 include_once plugin_dir_path(__FILE__) . 'contacts.php';
+
+// Activation hook to set up initial data
+register_activation_hook(__FILE__, 'my_csv_importer_activation');
+function my_csv_importer_activation() {
+  my_csv_importer_create_table();
+}
 
 // Enqueue Bootstrap scripts and styles
 function my_csv_importer_enqueue_scripts() {
@@ -48,11 +53,4 @@ function my_csv_importer_admin_menu() {
 }
 add_action('admin_menu', 'my_csv_importer_admin_menu');
 
-// Activation hook to set up initial data
-function my_csv_importer_activation() {
-  my_csv_importer_create_table();
-}
-register_activation_hook(__FILE__, 'my_csv_importer_activation');
-
-// Include table creation function here as previously given
 ?>

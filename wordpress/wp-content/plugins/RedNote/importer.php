@@ -1,20 +1,5 @@
 <?php
-
-function my_csv_importer_import_page() {
-    ?>
-    <div class="wrap">
-        <h2>Import CSV</h2>
-        <form action="<?php echo admin_url('admin-post.php'); ?>" method="post" enctype="multipart/form-data" class="form-inline">
-            <input type="hidden" name="action" value="process_csv">
-            <div class="form-group">
-                <input type="file" name="csv_file" class="form-control-file" accept=".csv" required>
-            </div>
-            <input type="submit" value="Upload CSV" class="btn btn-primary">
-        </form>
-    </div>
-    <?php
-}
-
+// Function to process the imported CSV data
 function my_csv_importer_process_csv() {
     global $wpdb;
     $table_name = $wpdb->prefix . 'imported_contacts';
@@ -64,8 +49,28 @@ function my_csv_importer_process_csv() {
     }
 }
 
+// Function to create the database table
+function my_csv_importer_create_table() {
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'imported_contacts';
+
+    $charset_collate = $wpdb->get_charset_collate();
+
+    $sql = "CREATE TABLE $table_name (
+        id mediumint(9) NOT NULL AUTO_INCREMENT,
+        name varchar(255) NOT NULL,
+        mobile varchar(20) NOT NULL,
+        email varchar(255) NOT NULL,
+        level varchar(50) NOT NULL,
+        profile_picture_url varchar(255),
+        PRIMARY KEY  (id)
+    ) $charset_collate;";
+
+    require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+    dbDelta($sql);
+}
+
+// Hook for processing CSV data
 add_action('admin_post_process_csv', 'my_csv_importer_process_csv');
 add_action('admin_post_nopriv_process_csv', 'my_csv_importer_process_csv');
-
 ?>
-

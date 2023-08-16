@@ -3,7 +3,7 @@
  * Plugin Name: My CSV Importer
  * Description: A plugin to import data from CSV and display it as post types.
  * Version: 1.0
- * Author: Your Name
+ * Author: Death301
  */
 
 // Include other files

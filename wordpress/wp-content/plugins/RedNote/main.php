@@ -97,4 +97,11 @@ function my_csv_importer_menu() {
     );
 }
 add_action('admin_menu', 'my_csv_importer_menu');
+function my_csv_importer_shortcode() {
+  ob_start();
+  my_csv_importer_get_contacts();
+  return ob_get_clean();
+}
+add_shortcode('csv_importer', 'my_csv_importer_shortcode');
+
 ?>

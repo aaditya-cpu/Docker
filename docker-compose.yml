@@ -15,9 +15,9 @@ services:
       - '3307:3306'
 
   wordpress:
+    build: .  # Builds using the Dockerfile in the current directory
     depends_on:
       - db
-    image: wordpress:latest
     volumes:
       - ./wordpress:/var/www/html
       - ./uploads:/var/www/html/wp-content/uploads  # New line to mount uploads directory

@@ -1,0 +1,41 @@
+
+1. Include the Database File:
+
+At the beginning of admin/admin-page.php, you have:
+
+php
+
+include_once '/includes/db.php';
+
+This line includes the db.php file, making all its functions and variables available within admin/admin-page.php. This file likely contains functions related to interacting with the database, such as connecting, querying, fetching data, etc.
+2. Functions & Actions:
+
+    your_plugin_admin_page(): This function is the main logic hub of your admin page. It handles different POST and GET requests, performs CRUD operations (Create, Read, Update, Delete), and renders HTML for the form and table.
+
+    delete_invoice($invoice_id): This function deals with soft deletion of invoices. It updates the deleted_at field in the corresponding tables.
+
+    your_plugin_admin_menu(): This function adds the plugin admin page to the WordPress menu. It hooks into WordPress's admin menu functionality.
+
+3. Global $wpdb Object:
+
+The code makes extensive use of the global $wpdb object, which is part of WordPress's core. It allows interaction with the WordPress database.
+4. Action Hooks:
+
+The code also includes the following action hook:
+
+php
+
+add_action('admin_menu', 'your_plugin_admin_menu');
+
+This tells WordPress to call the your_plugin_admin_menu function when building the admin menu, adding a new submenu page for the plugin.
+Interaction:
+
+    Include Interaction: When the admin/admin-page.php is loaded, it includes db.php, enabling database interactions.
+
+    User Interaction: When a user interacts with the admin page (e.g., submitting a form), the $_POST and $_GET data are processed inside the your_plugin_admin_page function.
+
+    Database Interaction: Within the various conditions and logic inside your_plugin_admin_page, you have calls to $wpdb->update, $wpdb->insert, $wpdb->delete, etc., which interact with the database. The logic in db.php likely assists in these interactions.
+
+    Rendering: Finally, the HTML portion of the code is rendered, possibly reflecting the changes made to the database.
+
+Without the content of db.php, we can't see the direct functions or queries that are being used, but the above gives you a high-level view of how these files are likely interacting.

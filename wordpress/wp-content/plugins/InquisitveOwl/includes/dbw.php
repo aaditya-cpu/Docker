@@ -1,14 +1,18 @@
 <?php
-// Connect to the database
+// Database configuration
 $servername = "localhost";
 $username = "username";
 $password = "password";
 $dbname = "your_database";
 
+// Connect to the database
 $conn = new mysqli($servername, $username, $password, $dbname);
 
+// Check connection
 if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+    // Log the error instead of displaying it
+    error_log("Connection failed: " . $conn->connect_error);
+    die("An error occurred. Please try again later.");
 }
 
 // Create invoice_data table if not exists
@@ -26,7 +30,7 @@ $invoice_data_sql = "CREATE TABLE IF NOT EXISTS invoice_data (
 )";
 
 if ($conn->query($invoice_data_sql) !== TRUE) {
-    echo "Error creating invoice_data table: " . $conn->error;
+    error_log("Error creating invoice_data table: " . $conn->error);
 }
 
 // Create personal_details table if not exists
@@ -40,8 +44,10 @@ $personal_details_sql = "CREATE TABLE IF NOT EXISTS personal_details (
 )";
 
 if ($conn->query($personal_details_sql) !== TRUE) {
-    echo "Error creating personal_details table: " . $conn->error;
+    error_log("Error creating personal_details table: " . $conn->error);
 }
+
+// Function to get invoice data by ID
 function get_invoice_data_by_id($invoice_id) {
     global $conn;
     
@@ -63,6 +69,8 @@ function fetch_all_invoices() {
 
     return $result->fetch_all(MYSQLI_ASSOC);
 }
+
+// Function to soft delete an invoice
 function soft_delete_invoice($invoice_id) {
     global $conn;
 
@@ -76,7 +84,8 @@ function soft_delete_invoice($invoice_id) {
     $stmt = $conn->prepare($sql);
 
     if (!$stmt) {
-        return "Error preparing the statement: " . $conn->error;
+        error_log("Error preparing the statement: " . $conn->error);
+        return "An error occurred. Please try again later.";
     }
 
     // Bind the invoice ID to the statement
@@ -84,14 +93,16 @@ function soft_delete_invoice($invoice_id) {
 
     // Execute the update
     if ($stmt->execute()) {
+        $stmt->close();
         return "Invoice deleted successfully.";
     } else {
-        return "Error deleting invoice: " . $stmt->error;
+        error_log("Error deleting invoice: " . $stmt->error);
+        $stmt->close();
+        return "An error occurred. Please try again later.";
     }
-
-    $stmt->close();
 }
 
-// You can call the soft_delete_invoice function here or in another file
-?>
+// Close the connection
+$conn->close();
 
+?>
